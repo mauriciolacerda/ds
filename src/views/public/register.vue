@@ -224,9 +224,6 @@
                 this.$router.push('/mailvalidate/' + this.email)
               }
             })
-            .catch(function (error) {
-              return console.log(error)
-            })
         }
       },
     },

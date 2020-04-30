@@ -106,9 +106,6 @@
                 this.$router.push('/login/')
               }
             })
-            .catch(function (error) {
-              return console.log(error)
-            })
         }
       },
     },

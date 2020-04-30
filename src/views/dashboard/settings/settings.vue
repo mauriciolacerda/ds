@@ -133,7 +133,6 @@
     mounted () {
       // recupera as configurações salvas
       axios.get('http://localhost:5000/settings?token=' + token).then(response => {
-        console.log(response)
         this.delay_in_days = response.data.delay_in_days
         this.sendermail = response.data.sendermail
         this.subjectmail = response.data.subjectmail
@@ -154,15 +153,11 @@
           })
             .then(res => {
               if (res.data.success === false) {
-                console.log(res.data.message)
               } else {
                 this.snackbar = true
                 this.message = 'Dados atualizados com sucesso'
                 this.$router.push('/settings/')
               }
-            })
-            .catch(function (error) {
-              return console.log(error)
             })
         }
       },

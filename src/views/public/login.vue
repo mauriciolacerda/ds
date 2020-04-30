@@ -155,9 +155,6 @@
                 this.$router.push('/')
               }
             })
-            .catch(function (error) {
-              return console.log(error)
-            })
         }
       },
     },

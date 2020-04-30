@@ -124,13 +124,9 @@
           })
             .then(res => {
               if (res.data.success === false) {
-                console.log(res.data.message)
               } else {
                 this.$router.push('/login')
               }
-            })
-            .catch(function (error) {
-              return console.log(error)
             })
         }
       },

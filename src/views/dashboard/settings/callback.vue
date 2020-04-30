@@ -81,7 +81,6 @@
     },
     methods: {
       getCallbackShopify () {
-        console.log(this.$route.query.shop)
         const shop = this.$route.query.shop
         const hmac = this.$route.query.hmac
         const code = this.$route.query.code
@@ -92,20 +91,12 @@
           localStorage.setItem('tokenShopify', response.data.tokenShopify)
           window.location.href = response.data.url
         })
-          .catch(function (error) {
-            console.log(error.response)
-          })
       },
       importCustomer () {
         const auth = localStorage.getItem('auth')
         const tokenShopify = localStorage.getItem('tokenShopify')
         const shop = localStorage.getItem('shop')
-        axios.get('http://localhost:5000/shopify/importCustomer?shop=' + shop + '&tokenShopify=' + tokenShopify + '&token=' + auth).then(response => {
-          console.log(response)
-        })
-          .catch(function (error) {
-            console.log(error.response)
-          })
+        axios.get('http://localhost:5000/shopify/importCustomer?shop=' + shop + '&tokenShopify=' + tokenShopify + '&token=' + auth)
       },
     },
   }

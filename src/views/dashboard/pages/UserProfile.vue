@@ -179,15 +179,11 @@
           })
             .then(res => {
               if (res.data.success === false) {
-                console.log(res.data.message)
               } else {
                 this.snackbar = true
                 this.message = 'Dados atualizados com sucesso'
                 // this.$router.push('/userprofile')
               }
-            })
-            .catch(function (error) {
-              return console.log(error)
             })
         }
       },
