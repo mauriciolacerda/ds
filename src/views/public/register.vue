@@ -200,7 +200,7 @@
       }
     },
     mounted () {
-      axios.get(process.env.HOST_API + '/plans/id?id=' + this.plan).then(response => {
+      axios.get('http://dropstationapi.heroku.com/plans/id?id=' + this.plan).then(response => {
         this.name = response.data[0].name
         this.price = response.data[0].price
         this.limit = response.data[0].limit
