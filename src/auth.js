@@ -34,8 +34,6 @@ export function isSignedIn () {
 
 export function isIntegrated () {
   const tokenShopify = localStorage.getItem('tokenShopify')
-  console.log(tokenShopify)
-
   if (tokenShopify === 'null') {
     return false
   } else {

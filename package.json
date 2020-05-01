@@ -1,6 +1,9 @@
 {
-  "name": "vuetify-material-dashboard",
+  "name": "dropstation",
   "version": "2.1.0",
+  "engines": {
+    "node": "12.16.x"
+  },
   "private": true,
   "scripts": {
     "postinstall": "npm run build",
