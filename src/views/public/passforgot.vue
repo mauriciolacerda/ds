@@ -93,7 +93,7 @@
     methods: {
       passforgot: function () {
         if (this.$refs.form.validate()) {
-          axios.post('https://dropstationapi.heroku.com/users/passforgot', {
+          axios.post('https://dropstationapi.herokuapp.com/users/passforgot', {
             email: this.email,
           })
             .then(res => {

@@ -327,7 +327,7 @@
     },
     mounted () {
       var auth = localStorage.getItem('auth')
-      axios.get('https://dropstationapi.heroku.com/dashboard/packages?token=' + auth)
+      axios.get('https://dropstationapi.herokuapp.com/dashboard/packages?token=' + auth)
         .then(result => {
           var dados = result.data
           var max = 0
@@ -340,7 +340,7 @@
             this.importedOrders.options.high = max++
           }
         })
-      axios.get('https://dropstationapi.heroku.com/dashboard/emails?token=' + auth)
+      axios.get('https://dropstationapi.herokuapp.com/dashboard/emails?token=' + auth)
         .then(result => {
           var dados = result.data
           var max = 0
@@ -353,7 +353,7 @@
             this.emailsEnviados.options.high = max++
           }
         })
-      axios.get('https://dropstationapi.heroku.com/dashboard/packages/bystatus?token=' + auth)
+      axios.get('https://dropstationapi.herokuapp.com/dashboard/packages/bystatus?token=' + auth)
         .then(result => {
           var dados = result.data
           for (var val of dados) {
@@ -365,15 +365,15 @@
             }
           }
         })
-      axios.get('https://dropstationapi.heroku.com/dashboard/delayedpackages?token=' + auth)
+      axios.get('https://dropstationapi.herokuapp.com/dashboard/delayedpackages?token=' + auth)
         .then(result => {
           this.atrasados = result.data.contador.toString()
         })
-      axios.get('https://dropstationapi.heroku.com/dashboard/deliveryTime?token=' + auth)
+      axios.get('https://dropstationapi.herokuapp.com/dashboard/deliveryTime?token=' + auth)
         .then(result => {
           this.media = result.data.media.toString() + ' dias'
         })
-      axios.get('https://dropstationapi.heroku.com/dashboard/lastemails?token=' + auth)
+      axios.get('https://dropstationapi.herokuapp.com/dashboard/lastemails?token=' + auth)
         .then(result => {
           this.items = result.data
         })
