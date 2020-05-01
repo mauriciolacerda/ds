@@ -195,7 +195,7 @@
       }),
       sincronize: function () {
         this.overlay = !this.overlay
-        axios.post(process.env.HOST_API + '/sincronize', {
+        axios.post('https://dropstationapi.heroku.com/sincronize', {
           tokenShopify: localStorage.getItem('tokenShopify'),
           shop: localStorage.getItem('shop'),
           token: localStorage.getItem('auth'),

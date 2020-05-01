@@ -17,7 +17,7 @@
     },
     mounted () {
       const idemail = this.$route.query.id
-      axios.get(process.env.HOST_API + '/dashboard/emailById?id=' + idemail).then(response => {
+      axios.get('https://dropstationapi.heroku.com/dashboard/emailById?id=' + idemail).then(response => {
         this.body = response.data.body
       })
     },

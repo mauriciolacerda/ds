@@ -131,7 +131,7 @@
     },
     methods: {
       getShopify (txtShop) {
-        axios.get(process.env.HOST_API + '/shopify?shop=' + txtShop).then(response => {
+        axios.get('https://dropstationapi.heroku.com/shopify?shop=' + txtShop).then(response => {
           this.$cookies.config(60 * 60 * 24 * 30, '')
           this.$cookies.set('state', response.data.state)
           this.$cookies.set('auth', localStorage.getItem('auth'))

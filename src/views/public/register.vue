@@ -209,7 +209,7 @@
     methods: {
       createUser: function () {
         if (this.$refs.form.validate()) {
-          axios.post(process.env.HOST_API + '/users/signup', {
+          axios.post('https://dropstationapi.heroku.com/users/signup', {
             username: this.username,
             email: this.email,
             password: this.password,
