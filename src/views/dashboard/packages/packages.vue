@@ -81,7 +81,7 @@
       }
     },
     mounted () {
-      axios.get('http://localhost:5000/packages?token=' + localStorage.getItem('auth')).then(response => {
+      axios.get(process.env.HOST_API + '/packages?token=' + localStorage.getItem('auth')).then(response => {
         this.tblPackages = response.data
       })
     },
@@ -92,7 +92,7 @@
         }
       },
       getUrl (value) {
-        return 'http://localhost:8080/tracking?tracknumber=' + value
+        return process.env.HOST + '/tracking?tracknumber=' + value
       },
       getColor (status) {
         if (status === 'Entregue') return 'green'

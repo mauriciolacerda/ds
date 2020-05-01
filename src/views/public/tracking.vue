@@ -81,7 +81,7 @@
       }
     },
     mounted () {
-      axios.get('http://localhost:5000/packages/tracking?tracknumber=' + this.$route.query.tracknumber).then(response => {
+      axios.get(process.env.HOST_API + '/packages/tracking?tracknumber=' + this.$route.query.tracknumber).then(response => {
         this.eventos = response
       })
     },

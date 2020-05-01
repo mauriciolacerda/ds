@@ -93,7 +93,7 @@
     methods: {
       passforgot: function () {
         if (this.$refs.form.validate()) {
-          axios.post('http://localhost:5000/users/passforgot', {
+          axios.post(process.env.HOST_API + '/users/passforgot', {
             email: this.email,
           })
             .then(res => {

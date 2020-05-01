@@ -138,7 +138,7 @@
     methods: {
       login: function () {
         if (this.$refs.form.validate()) {
-          axios.post('http://localhost:5000/users/login', {
+          axios.post(process.env.HOST_API + '/users/login', {
             email: this.email,
             password: this.password,
           })

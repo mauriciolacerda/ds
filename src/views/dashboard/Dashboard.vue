@@ -327,7 +327,7 @@
     },
     mounted () {
       var auth = localStorage.getItem('auth')
-      axios.get('http://localhost:5000/dashboard/packages?token=' + auth)
+      axios.get(process.env.HOST_API + '/dashboard/packages?token=' + auth)
         .then(result => {
           var dados = result.data
           var max = 0
@@ -340,7 +340,7 @@
             this.importedOrders.options.high = max++
           }
         })
-      axios.get('http://localhost:5000/dashboard/emails?token=' + auth)
+      axios.get(process.env.HOST_API + '/dashboard/emails?token=' + auth)
         .then(result => {
           var dados = result.data
           var max = 0
@@ -353,7 +353,7 @@
             this.emailsEnviados.options.high = max++
           }
         })
-      axios.get('http://localhost:5000/dashboard/packages/bystatus?token=' + auth)
+      axios.get(process.env.HOST_API + '/dashboard/packages/bystatus?token=' + auth)
         .then(result => {
           var dados = result.data
           for (var val of dados) {
@@ -365,15 +365,15 @@
             }
           }
         })
-      axios.get('http://localhost:5000/dashboard/delayedpackages?token=' + auth)
+      axios.get(process.env.HOST_API + '/dashboard/delayedpackages?token=' + auth)
         .then(result => {
           this.atrasados = result.data.contador.toString()
         })
-      axios.get('http://localhost:5000/dashboard/deliveryTime?token=' + auth)
+      axios.get(process.env.HOST_API + '/dashboard/deliveryTime?token=' + auth)
         .then(result => {
           this.media = result.data.media.toString() + ' dias'
         })
-      axios.get('http://localhost:5000/dashboard/lastemails?token=' + auth)
+      axios.get(process.env.HOST_API + '/dashboard/lastemails?token=' + auth)
         .then(result => {
           this.items = result.data
         })
@@ -388,7 +388,7 @@
         }
       },
       getUrl (value) {
-        return 'http://localhost:8080/viewemail?id=' + value
+        return process.env.HOST + '/viewemail?id=' + value
       },
     },
   }

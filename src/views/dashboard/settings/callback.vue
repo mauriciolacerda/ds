@@ -87,7 +87,7 @@
         const state = this.$route.query.state
         const auth = localStorage.getItem('auth')
         localStorage.setItem('shop', shop)
-        axios.get('http://localhost:5000/shopify/callback?shop=' + shop + '&hmac=' + hmac + '&code=' + code + '&state=' + state + '&token=' + auth).then(response => {
+        axios.get(process.env.HOST_API + '/shopify/callback?shop=' + shop + '&hmac=' + hmac + '&code=' + code + '&state=' + state + '&token=' + auth).then(response => {
           localStorage.setItem('tokenShopify', response.data.tokenShopify)
           window.location.href = response.data.url
         })
@@ -96,7 +96,7 @@
         const auth = localStorage.getItem('auth')
         const tokenShopify = localStorage.getItem('tokenShopify')
         const shop = localStorage.getItem('shop')
-        axios.get('http://localhost:5000/shopify/importCustomer?shop=' + shop + '&tokenShopify=' + tokenShopify + '&token=' + auth)
+        axios.get(process.env.HOST_API + '/shopify/importCustomer?shop=' + shop + '&tokenShopify=' + tokenShopify + '&token=' + auth)
       },
     },
   }

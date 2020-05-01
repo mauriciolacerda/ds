@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:8080/'
+const baseURL = process.env.HOST
 
 function getHeaders () {
   const token = localStorage.getItem('token')

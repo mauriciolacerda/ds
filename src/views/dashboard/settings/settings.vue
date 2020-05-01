@@ -132,7 +132,7 @@
     },
     mounted () {
       // recupera as configurações salvas
-      axios.get('http://localhost:5000/settings?token=' + token).then(response => {
+      axios.get(process.env.HOST_API + '/settings?token=' + token).then(response => {
         this.delay_in_days = response.data.delay_in_days
         this.sendermail = response.data.sendermail
         this.subjectmail = response.data.subjectmail
@@ -143,7 +143,7 @@
     methods: {
       updatesettings: function () {
         if (this.$refs.form.validate()) {
-          axios.post('http://localhost:5000/settings', {
+          axios.post(process.env.HOST_API + '/settings', {
             token: token,
             delay_in_days: this.delay_in_days,
             sendermail: this.sendermail,

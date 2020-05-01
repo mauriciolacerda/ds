@@ -195,7 +195,7 @@
       }),
       sincronize: function () {
         this.overlay = !this.overlay
-        axios.post('http://localhost:5000/sincronize', {
+        axios.post(process.env.HOST_API + '/sincronize', {
           tokenShopify: localStorage.getItem('tokenShopify'),
           shop: localStorage.getItem('shop'),
           token: localStorage.getItem('auth'),

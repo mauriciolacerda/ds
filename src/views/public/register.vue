@@ -200,7 +200,7 @@
       }
     },
     mounted () {
-      axios.get('http://localhost:5000/plans/id?id=' + this.plan).then(response => {
+      axios.get(process.env.HOST_API + '/plans/id?id=' + this.plan).then(response => {
         this.name = response.data[0].name
         this.price = response.data[0].price
         this.limit = response.data[0].limit
@@ -209,7 +209,7 @@
     methods: {
       createUser: function () {
         if (this.$refs.form.validate()) {
-          axios.post('http://localhost:5000/users/signup', {
+          axios.post(process.env.HOST_API + '/users/signup', {
             username: this.username,
             email: this.email,
             password: this.password,

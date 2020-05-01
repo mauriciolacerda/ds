@@ -117,7 +117,7 @@
     methods: {
       changepass: function () {
         if (this.$refs.form.validate()) {
-          axios.post('http://localhost:5000/users/passchange', {
+          axios.post(process.env.HOST_API + '/users/passchange', {
             email: this.email,
             password: this.password,
             hash: this.hash,
