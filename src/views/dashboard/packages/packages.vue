@@ -92,7 +92,7 @@
         }
       },
       getUrl (value) {
-        return process.env.HOST + '/tracking?tracknumber=' + value
+        return 'http://dropstation.herokuapp.com/tracking?tracknumber=' + value
       },
       getColor (status) {
         if (status === 'Entregue') return 'green'

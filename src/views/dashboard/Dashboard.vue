@@ -388,7 +388,7 @@
         }
       },
       getUrl (value) {
-        return process.env.HOST + '/viewemail?id=' + value
+        return 'https://dropstation.herokuapp.com/viewemail?id=' + value
       },
     },
   }

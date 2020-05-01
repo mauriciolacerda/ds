@@ -1,4 +1,4 @@
-const baseURL = process.env.HOST
+const baseURL = 'https://dropstation.herokuapp.com'
 
 function getHeaders () {
   const token = localStorage.getItem('token')
