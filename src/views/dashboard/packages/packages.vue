@@ -81,7 +81,7 @@
       }
     },
     mounted () {
-      axios.get('https://dropstationapi.herokuapp.com/packages?token=' + localStorage.getItem('auth')).then(response => {
+      axios.get('https://api.dropstation.com.br/packages?token=' + localStorage.getItem('auth')).then(response => {
         this.tblPackages = response.data
       })
     },
@@ -92,7 +92,7 @@
         }
       },
       getUrl (value) {
-        return 'http://dropstation.herokuapp.com/tracking?tracknumber=' + value
+        return 'http://app.dropstation.com.br/tracking?tracknumber=' + value
       },
       getColor (status) {
         if (status === 'Entregue') return 'green'

@@ -132,7 +132,7 @@
     },
     mounted () {
       // recupera as configurações salvas
-      axios.get('https://dropstationapi.herokuapp.com/settings?token=' + token).then(response => {
+      axios.get('https://api.dropstation.com.br/settings?token=' + token).then(response => {
         this.delay_in_days = response.data.delay_in_days
         this.sendermail = response.data.sendermail
         this.subjectmail = response.data.subjectmail
@@ -143,7 +143,7 @@
     methods: {
       updatesettings: function () {
         if (this.$refs.form.validate()) {
-          axios.post('https://dropstationapi.herokuapp.com/settings', {
+          axios.post('https://api.dropstation.com.br/settings', {
             token: token,
             delay_in_days: this.delay_in_days,
             sendermail: this.sendermail,

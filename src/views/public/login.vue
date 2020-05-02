@@ -138,7 +138,7 @@
     methods: {
       login: function () {
         if (this.$refs.form.validate()) {
-          axios.post('https://dropstationapi.herokuapp.com/users/login', {
+          axios.post('https://api.dropstation.com.br/users/login', {
             email: this.email,
             password: this.password,
           })

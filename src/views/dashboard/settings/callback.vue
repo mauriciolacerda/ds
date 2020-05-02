@@ -87,7 +87,7 @@
         const state = this.$route.query.state
         const auth = localStorage.getItem('auth')
         localStorage.setItem('shop', shop)
-        axios.get('https://dropstationapi.herokuapp.com/shopify/callback?shop=' + shop + '&hmac=' + hmac + '&code=' + code + '&state=' + state + '&token=' + auth).then(response => {
+        axios.get('https://api.dropstation.com.br/shopify/callback?shop=' + shop + '&hmac=' + hmac + '&code=' + code + '&state=' + state + '&token=' + auth).then(response => {
           localStorage.setItem('tokenShopify', response.data.tokenShopify)
           window.location.href = response.data.url
         })
@@ -96,7 +96,7 @@
         const auth = localStorage.getItem('auth')
         const tokenShopify = localStorage.getItem('tokenShopify')
         const shop = localStorage.getItem('shop')
-        axios.get('https://dropstationapi.herokuapp.com/shopify/importCustomer?shop=' + shop + '&tokenShopify=' + tokenShopify + '&token=' + auth)
+        axios.get('https://api.dropstation.com.br/shopify/importCustomer?shop=' + shop + '&tokenShopify=' + tokenShopify + '&token=' + auth)
       },
     },
   }
