@@ -31,7 +31,7 @@
           contain
         >
           <v-img
-            src="../../../../assets/ds-logo.png"
+            src="../../../../assets/logo_drop.png"
             max-height="50"
           />
         </v-list-item-avatar>
