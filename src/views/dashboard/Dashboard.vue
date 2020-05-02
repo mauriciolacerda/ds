@@ -327,7 +327,7 @@
     },
     mounted () {
       var auth = localStorage.getItem('auth')
-      axios.get('https://api.dropstation.com.br/dashboard/packages?token=' + auth)
+      axios.get('http://api.dropstation.com.br/dashboard/packages?token=' + auth)
         .then(result => {
           var dados = result.data
           var max = 0
@@ -340,7 +340,7 @@
             this.importedOrders.options.high = max++
           }
         })
-      axios.get('https://api.dropstation.com.br/dashboard/emails?token=' + auth)
+      axios.get('http://api.dropstation.com.br/dashboard/emails?token=' + auth)
         .then(result => {
           var dados = result.data
           var max = 0
@@ -353,7 +353,7 @@
             this.emailsEnviados.options.high = max++
           }
         })
-      axios.get('https://api.dropstation.com.br/dashboard/packages/bystatus?token=' + auth)
+      axios.get('http://api.dropstation.com.br/dashboard/packages/bystatus?token=' + auth)
         .then(result => {
           var dados = result.data
           for (var val of dados) {
@@ -365,15 +365,15 @@
             }
           }
         })
-      axios.get('https://api.dropstation.com.br/dashboard/delayedpackages?token=' + auth)
+      axios.get('http://api.dropstation.com.br/dashboard/delayedpackages?token=' + auth)
         .then(result => {
           this.atrasados = result.data.contador.toString()
         })
-      axios.get('https://api.dropstation.com.br/dashboard/deliveryTime?token=' + auth)
+      axios.get('http://api.dropstation.com.br/dashboard/deliveryTime?token=' + auth)
         .then(result => {
           this.media = result.data.media.toString() + ' dias'
         })
-      axios.get('https://api.dropstation.com.br/dashboard/lastemails?token=' + auth)
+      axios.get('http://api.dropstation.com.br/dashboard/lastemails?token=' + auth)
         .then(result => {
           this.items = result.data
         })
@@ -388,7 +388,7 @@
         }
       },
       getUrl (value) {
-        return 'https://app.dropstation.com.br/viewemail?id=' + value
+        return 'http://app.dropstation.com.br/viewemail?id=' + value
       },
     },
   }

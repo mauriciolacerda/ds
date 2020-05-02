@@ -1,4 +1,4 @@
-const baseURL = 'https://app.dropstation.com.br'
+const baseURL = 'http://app.dropstation.com.br'
 
 function getHeaders () {
   const token = localStorage.getItem('token')

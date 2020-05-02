@@ -81,7 +81,7 @@
       }
     },
     mounted () {
-      axios.get('https://api.dropstation.com.br/packages?token=' + localStorage.getItem('auth')).then(response => {
+      axios.get('http://api.dropstation.com.br/packages?token=' + localStorage.getItem('auth')).then(response => {
         this.tblPackages = response.data
       })
     },

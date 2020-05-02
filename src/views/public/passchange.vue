@@ -117,7 +117,7 @@
     methods: {
       changepass: function () {
         if (this.$refs.form.validate()) {
-          axios.post('https://api.dropstation.com.br/users/passchange', {
+          axios.post('http://api.dropstation.com.br/users/passchange', {
             email: this.email,
             password: this.password,
             hash: this.hash,

@@ -195,7 +195,7 @@
       }),
       sincronize: function () {
         this.overlay = !this.overlay
-        axios.post('https://api.dropstation.com.br/sincronize', {
+        axios.post('http://api.dropstation.com.br/sincronize', {
           tokenShopify: localStorage.getItem('tokenShopify'),
           shop: localStorage.getItem('shop'),
           token: localStorage.getItem('auth'),

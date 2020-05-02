@@ -200,7 +200,7 @@
       }
     },
     mounted () {
-      axios.get('https://api.dropstation.com.br/plans/id?id=' + this.plan).then(response => {
+      axios.get('http://api.dropstation.com.br/plans/id?id=' + this.plan).then(response => {
         this.name = response.data[0].name
         this.price = response.data[0].price
         this.limit = response.data[0].limit
@@ -209,7 +209,7 @@
     methods: {
       createUser: function () {
         if (this.$refs.form.validate()) {
-          axios.post('https://api.dropstation.com.br/users/signup', {
+          axios.post('http://api.dropstation.com.br/users/signup', {
             username: this.username,
             email: this.email,
             password: this.password,
