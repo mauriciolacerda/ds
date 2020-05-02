@@ -22,12 +22,14 @@
                 :key="evento.id"
               >
                 <v-card class="elevation-2">
+                  <v-card-text>
+                    {{ evento.status | capitalize }}
+                  </v-card-text>
                   <v-card-text
                     v-if="evento.observation !== null"
                     class="uppercase"
                   >
-                    <p><b>{{ evento.status | capitalize }} </b></p>
-                    <p> {{ evento.observation }} </p>
+                    {{ evento.observation }}
                   </v-card-text>
                   <v-chip
                     class="ma-2"
