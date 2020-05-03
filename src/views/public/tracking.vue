@@ -81,7 +81,7 @@
       }
     },
     mounted () {
-      axios.get('http://api.dropstation.com.br/packages/tracking?tracknumber=' + this.$route.query.tracknumber).then(response => {
+      axios.get('https://dropstationapi.herokuapp.com/packages/tracking?tracknumber=' + this.$route.query.tracknumber).then(response => {
         this.eventos = response
       })
     },

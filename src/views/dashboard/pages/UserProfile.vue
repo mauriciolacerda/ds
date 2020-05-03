@@ -156,12 +156,12 @@
     mounted () {
       var token = localStorage.getItem('auth')
       const { idplans: idPlan } = decode(token)
-      axios.get('http://api.dropstation.com.br/plans/id?id=' + idPlan).then(response => {
+      axios.get('https://dropstationapi.herokuapp.com/plans/id?id=' + idPlan).then(response => {
         this.name = response.data[0].name
         this.price = response.data[0].price
         this.limit = response.data[0].limit
       })
-      axios.get('http://api.dropstation.com.br/users/userById?token=' + token).then(response => {
+      axios.get('https://dropstationapi.herokuapp.com/users/userById?token=' + token).then(response => {
         this.username = response.data.name
         this.email = response.data.email
         this.phone = response.data.phone
@@ -171,7 +171,7 @@
       updateUser: function () {
         var token = localStorage.getItem('auth')
         if (this.$refs.form.validate()) {
-          axios.post('http://api.dropstation.com.br/users/updateUser', {
+          axios.post('https://dropstationapi.herokuapp.com/users/updateUser', {
             token: token,
             name: this.username,
             email: this.email,
