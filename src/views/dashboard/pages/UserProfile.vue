@@ -21,107 +21,104 @@
           </template>
 
           <v-form
-              ref="form"
-              v-model="valid"
-              lazy-validation
-            >
-              <v-container class="py-0">
-                <v-row>
-                  <v-col
-                    cols="12"
-                    md="12"
+            ref="form"
+            v-model="valid"
+            lazy-validation
+          >
+            <v-container class="py-0">
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="12"
+                >
+                  <v-text-field
+                    v-model="username"
+                    label="Nome completo"
+                    class="purple-input"
+                    :rules="[rules.required]"
+                  />
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="email"
+                    label="E-mail"
+                    class="purple-input"
+                    :rules="[rules.required]"
+                  />
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="4"
+                >
+                  <v-text-field
+                    v-model="phone"
+                    v-mask="'(##) #####.####'"
+                    class="purple-input"
+                    label="Celular"
+                    :rules="[rules.required]"
+                  />
+                </v-col>
+                <v-col
+                  cols="12"
+                  class="text-right"
+                >
+                  <v-btn
+                    color="success"
+                    class="mr-0"
+                    @click="updateUser"
                   >
-                    <v-text-field
-                      v-model="username"
-                      label="Nome completo"
-                      class="purple-input"
-                      :rules="[rules.required]"
-                    />
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="email"
-                      label="E-mail"
-                      class="purple-input"
-                      :rules="[rules.required]"
-                    />
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    md="4"
-                  >
-                    <v-text-field
-                      v-model="phone"
-                      v-mask="'(##) #####.####'"
-                      class="purple-input"
-                      label="Celular"
-                      :rules="[rules.required]"
-                    />
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    class="text-right"
-                  >
-                    <v-btn
-                      color="success"
-                      class="mr-0"
-                      @click="updateUser"
-                    >
-                      Alterar
-                    </v-btn>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-form>
+                    Alterar
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-form>
         </base-material-card>
       </v-col>
-
       <v-col
-          cols="12"
-          md="4"
+        cols="12"
+        md="4"
+      >
+        <base-material-card
+          class="v-card-profile"
+          avatar="https://ser-tel.com.br/wp-content/uploads/2016/10/2016-10-25-miniatura-a-evolucao-da-seguranca-eletronica.jpg"
         >
-          <base-material-card
-            class="v-card-profile"
-            avatar="https://ser-tel.com.br/wp-content/uploads/2016/10/2016-10-25-miniatura-a-evolucao-da-seguranca-eletronica.jpg"
-          >
-            <v-card-text class="text-center">
-              <h6 class="display-1 mb-1 grey--text">
-                Atualmente você é assinante do plano
-              </h6>
-
-              <h4 class="display-2 font-weight-light mb-3 black--text">
-                {{ name }}
-              </h4>
-
-              <p class="font-weight-light grey--text">
-                Este plano permite que você monitore até {{ limit }} vendas por mês
-              </p>
-              <p class="font-weight-light grey--text">
-                O custo atual do plano é  <b>USD {{ price }}</b>
-              </p>
+          <v-card-text class="text-center">
+            <h6 class="display-1 mb-1 grey--text">
+              Atualmente você é assinante do plano
+            </h6>
+            <h4 class="display-2 font-weight-light mb-3 black--text">
+              {{ name }}
+            </h4>
+            <p class="font-weight-light grey--text">
+              Este plano permite que você monitore até {{ limit }} vendas por mês
+            </p>
+            <p class="font-weight-light grey--text">
+              O custo atual do plano é  <b>USD {{ price }}</b>
+            </p>
+            <v-btn
+              color="secondary"
+              rounded
+              to="/plans"
+              class="mr-0"
+            >
+              Cancelar assinatura
+            </v-btn>
+            <v-snackbar
+              v-model="snackbar"
+            >
+              {{ message }}
               <v-btn
-                color="secondary"
-                rounded
-                to="/plans"
-                class="mr-0"
+                color="green"
+                text
+                @click="snackbar = false"
               >
-                Cancelar assinatura
+                Fechar
               </v-btn>
-              <v-snackbar
-                v-model="snackbar"
-              >
-                {{ message }}
-                <v-btn
-                  color="green"
-                  text
-                  @click="snackbar = false"
-                >
-                  Fechar
-                </v-btn>
-              </v-snackbar>
-            </v-card-text>
-          </base-material-card>
-        </v-col>
+            </v-snackbar>
+          </v-card-text>
+        </base-material-card>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -182,7 +179,6 @@
               } else {
                 this.snackbar = true
                 this.message = 'Dados atualizados com sucesso'
-                // this.$router.push('/userprofile')
               }
             })
         }

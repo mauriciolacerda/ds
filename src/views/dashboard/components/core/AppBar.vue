@@ -124,15 +124,38 @@
         </div>
       </v-list>
     </v-menu> -->
-
-    <v-btn
+          <v-menu offset-y>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            class="ml-2"
+            min-width="0"
+            text
+            v-on="on"
+          >
+            <v-icon>mdi-account</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            to="/userprofile"
+          >
+            <v-list-item-title>Perfil</v-list-item-title>
+          </v-list-item>
+          <v-list-item
+            @click=logout()
+          >
+            <v-list-item-title>Sair</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    <!-- <v-btn
       class="ml-2"
       min-width="0"
       text
       to="userprofile"
     >
       <v-icon>mdi-account</v-icon>
-    </v-btn>
+    </v-btn> -->
   </v-app-bar>
 </template>
 
@@ -193,6 +216,12 @@
       ...mapMutations({
         setDrawer: 'SET_DRAWER',
       }),
+      logout: function () {
+        localStorage.removeItem('auth')
+        localStorage.removeItem('tokenShopify')
+        localStorage.removeItem('shop')
+        this.$router.push('/login')
+      },
       sincronize: function () {
         this.overlay = !this.overlay
         axios.post('https://dropstationapi.herokuapp.com/sincronize', {

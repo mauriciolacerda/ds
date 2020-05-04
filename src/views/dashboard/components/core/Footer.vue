@@ -48,16 +48,12 @@
     data: () => ({
       links: [
         {
-          href: 'dropstation.com.br',
+          href: 'https://www.dropstation.com.br',
           text: 'DropStation',
         },
         {
-          href: 'dropstation.com.br',
+          href: 'https://www.dropstation.com.br/about',
           text: 'Sobre nós',
-        },
-        {
-          href: 'blog.dropstation.com.br',
-          text: 'Blog',
         },
         {
           href: '/plans',
