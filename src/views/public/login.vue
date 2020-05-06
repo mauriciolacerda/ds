@@ -1,6 +1,5 @@
 <template>
   <v-app id="inspire">
-    <v-content>
       <v-container
         class="fill-height"
         fluid
@@ -93,7 +92,6 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
     <dashboard-core-footer />
     <v-snackbar
       v-model="snackbar"

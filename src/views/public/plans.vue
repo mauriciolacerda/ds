@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <v-container
-      id="upgrade"
       fluid
       tag="section"
     >

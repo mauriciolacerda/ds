@@ -20,6 +20,10 @@ export default new Router({
       },
     },
     {
+      path: '/install',
+      component: () => import('@/views/public/install'),
+    },
+    {
       path: '/plans',
       component: () => import('@/views/public/plans'),
     },
