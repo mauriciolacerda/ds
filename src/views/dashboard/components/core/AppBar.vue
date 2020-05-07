@@ -61,10 +61,10 @@
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
         <v-btn
-          v-on="on"
           class="ml-2"
           min-width="0"
           text
+          v-on="on"
           @click="sincronize"
         >
           <v-icon>mdi-autorenew</v-icon>
@@ -124,38 +124,37 @@
         </div>
       </v-list>
     </v-menu> -->
-          <v-menu offset-y>
-        <template v-slot:activator="{ on }">
-          <v-btn
-            class="ml-2"
-            min-width="0"
-            text
-            v-on="on"
-          >
-            <v-icon>mdi-account</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item
-            to="/userprofile"
-          >
-            <v-list-item-title>Perfil</v-list-item-title>
-          </v-list-item>
-          <v-list-item
-            @click=logout()
-          >
-            <v-list-item-title>Sair</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-    <!-- <v-btn
-      class="ml-2"
-      min-width="0"
-      text
-      to="userprofile"
+    <v-menu
+      bottom
+      left
+      offset-y
+      origin="top right"
+      transition="scale-transition"
     >
-      <v-icon>mdi-account</v-icon>
-    </v-btn> -->
+      <template v-slot:activator="{ on }">
+        <v-btn
+          class="ml-2"
+          min-width="0"
+          text
+          v-bind="attrs"
+          v-on="on"
+        >
+          <v-icon>mdi-account</v-icon>
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item
+          to="/userprofile"
+        >
+          <v-list-item-title>Perfil</v-list-item-title>
+        </v-list-item>
+        <v-list-item
+          @click="logout()"
+        >
+          <v-list-item-title>Sair</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
   </v-app-bar>
 </template>
 
@@ -165,7 +164,7 @@
 
   // Utilities
   import { mapState, mapMutations } from 'vuex'
-
+  import { EventBus } from '../../../../EventBus'
   import axios from 'axios'
 
   export default {
@@ -207,11 +206,14 @@
       notifications: [],
       overlay: false,
     }),
-
     computed: {
       ...mapState(['drawer']),
     },
-
+    mounted () {
+      EventBus.$on('importar', importados => {
+        this.sincronize()
+      })
+    },
     methods: {
       ...mapMutations({
         setDrawer: 'SET_DRAWER',

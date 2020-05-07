@@ -146,7 +146,7 @@
         overlay: false,
         overlaytext: '',
         e1: 1,
-        validar: 'testando',
+        validar: '',
         txtShop: '',
         errors: [],
         integrated: '',

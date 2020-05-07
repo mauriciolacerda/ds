@@ -16,12 +16,15 @@
             <h4 class="display-2 font-weight-light mb-3 black--text">
               Rastreio do pacote {{ this.$route.query.tracknumber }}
             </h4>
-            <v-timeline dense>
+            <v-timeline
+              dense
+            >
               <v-timeline-item
                 v-for="evento in eventos.data"
                 :key="evento.id"
+                small
               >
-                <v-card class="elevation-2">
+                <v-card class="elevation-1">
                   <v-card-text>
                     {{ evento.status | capitalize }}
                   </v-card-text>
@@ -37,7 +40,9 @@
                     label
                     text-color="black"
                   >
-                    <v-icon left>mdi-alarm</v-icon>
+                    <v-icon left>
+                      mdi-alarm
+                    </v-icon>
                     {{ format_date(evento.trackedAt) }}
                   </v-chip>
                   <v-chip
@@ -46,7 +51,9 @@
                     label
                     text-color="black"
                   >
-                    <v-icon left>mdi-map-marker-outline</v-icon>
+                    <v-icon left>
+                      mdi-map-marker-outline
+                    </v-icon>
                     {{ evento.locale | capitalize }}
                   </v-chip>
                 </v-card>
@@ -97,6 +104,5 @@
 <style>
 .uppercase {
   text-transform: uppercase;
-  margin-top: 2px;
 }
 </style>

@@ -6,143 +6,80 @@
   >
     <v-row>
       <v-col
+        v-if="!importados"
         cols="12"
-        lg="6"
+        lg="12"
       >
-        <base-material-chart-card
-          :data="emailsEnviados.data"
-          :options="emailsEnviados.options"
-          :responsive-options="emailsEnviados.responsiveOptions"
+        <v-alert
           color="primary"
-          hover-reveal
-          type="Bar"
+          dark
+          icon="mdi-alert"
+          border="left"
+          prominent
         >
-          <template v-slot:reveal-actions>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  color="info"
-                  icon
-                  v-on="on"
-                >
-                  <v-icon
-                    color="info"
-                  >
-                    mdi-refresh
-                  </v-icon>
-                </v-btn>
-              </template>
-
-              <span>Refresh</span>
-            </v-tooltip>
-
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  light
-                  icon
-                  v-on="on"
-                >
-                  <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-              </template>
-
-              <span>Change Date</span>
-            </v-tooltip>
-          </template>
-
-          <h4 class="card-title font-weight-light mt-2 ml-2">
-            E-mails enviados
-          </h4>
-
-          <p class="d-inline-flex font-weight-light ml-2 mt-1">
-            Histórico de e-mails enviados
-          </p>
-
-          <template v-slot:actions>
-            <v-icon
-              class="mr-1"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">atualizado há 10 minutos</span>
-          </template>
-        </base-material-chart-card>
+          <v-row align="center">
+            <v-col class="grow">
+              Você ainda não realizou a primeira importação dos pedidos da Shopify. Clique no botão ao lado para realizar a importação
+            </v-col>
+            <v-col class="shrink">
+              <v-btn
+                @click="importar"
+              >
+                Importar
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-alert>
       </v-col>
-
       <v-col
+        v-if="!importados"
+        cols="12"
+        lg="12"
+      >
+        <v-alert
+          color="primary"
+          dark
+          icon="mdi-alert"
+          border="left"
+          prominent
+        >
+          <v-row align="center">
+            <v-col class="grow">
+              Verifique a configuração da sua plataforma. Clique no botão ao lado para realizar a configuração
+            </v-col>
+            <v-col class="shrink">
+              <v-btn
+                to="/settings"
+              >
+                Configurar
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-alert>
+      </v-col>
+      <v-col
+        v-if="importados"
         cols="12"
         lg="6"
       >
-        <base-material-chart-card
-          :data="importedOrders.data"
-          :options="importedOrders.options"
-          color="black"
-          hover-reveal
-          type="Line"
-        >
-          <template v-slot:reveal-actions>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  color="info"
-                  icon
-                  v-on="on"
-                >
-                  <v-icon
-                    color="info"
-                  >
-                    mdi-refresh
-                  </v-icon>
-                </v-btn>
-              </template>
-              <span>Refresh</span>
-            </v-tooltip>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  light
-                  icon
-                  v-on="on"
-                >
-                  <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-              </template>
-              <span>Change Date</span>
-            </v-tooltip>
-          </template>
+        <graphorders />
+      </v-col>
 
-          <h4 class="card-title font-weight-light mt-2 ml-2">
-            Pedidos importados
-          </h4>
-
-          <p class="d-inline-flex font-weight-light ml-2 mt-1">
-            Histórico da importação de pedidos da sua loja
-          </p>
-
-          <template v-slot:actions>
-            <v-icon
-              class="mr-1"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">atualizado há 10 minutos</span>
-          </template>
-        </base-material-chart-card>
+      <v-col
+        v-if="importados"
+        cols="12"
+        lg="6"
+      >
+        <graphemails />
       </v-col>
       <v-col
+        v-if="importados"
         cols="12"
         sm="6"
         lg="3"
       >
         <base-material-stats-card
-          color="info"
+          color="blue-grey darken-3"
           icon="mdi-av-timer"
           title="Prazo médio de entrega"
           :value="media"
@@ -152,12 +89,13 @@
       </v-col>
 
       <v-col
+        v-if="importados"
         cols="12"
         sm="6"
         lg="3"
       >
         <base-material-stats-card
-          color="gray"
+          color="blue-grey darken-1"
           icon="mdi-airplane"
           title="Pacotes em trânsito"
           :value="emtransito"
@@ -167,12 +105,13 @@
       </v-col>
 
       <v-col
+        v-if="importados"
         cols="12"
         sm="6"
         lg="3"
       >
         <base-material-stats-card
-          color="success"
+          color="blue-grey lighten-2"
           icon="mdi-store"
           title="Pacotes entregues"
           :value="entregues"
@@ -181,6 +120,7 @@
         />
       </v-col>
       <v-col
+        v-if="importados"
         cols="12"
         sm="6"
         lg="3"
@@ -197,11 +137,12 @@
       </v-col>
 
       <v-col
+        v-if="emailsenviados"
         cols="12"
         md="12"
       >
         <base-material-card
-          color="warning"
+          color="default"
           class="px-5 py-3"
         >
           <template v-slot:heading>
@@ -239,62 +180,21 @@
 <script>
   import axios from 'axios'
   import moment from 'moment'
+  import { EventBus } from '../../EventBus'
   export default {
     name: 'DashboardDashboard',
+    components: {
+      Graphemails: () => import('./component/GraphEmails'),
+      Graphorders: () => import('./component/GraphOrders'),
+    },
     data () {
       return {
+        importados: true,
+        emailsenviados: true,
         emtransito: '',
         entregues: '',
         atrasados: '',
         media: '',
-        importedOrders: {
-          data: {
-            labels: [],
-            series: [[]],
-          },
-          options: {
-            lineSmooth: this.$chartist.Interpolation.cardinal({
-              tension: 0,
-            }),
-            low: 0,
-            high: 0, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: {
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0,
-            },
-          },
-        },
-        emailsEnviados: {
-          data: {
-            labels: [],
-            series: [[]],
-          },
-          options: {
-            axisX: {
-              showGrid: false,
-            },
-            low: 0,
-            high: 1000,
-            chartPadding: {
-              top: 0,
-              right: 5,
-              bottom: 0,
-              left: 0,
-            },
-          },
-          responsiveOptions: [
-            ['screen and (max-width: 640px)', {
-              seriesBarDistance: 5,
-              axisX: {
-                labelInterpolationFnc: function (value) {
-                  return value[0]
-                },
-              },
-            }],
-          ],
-        },
         headers: [
           {
             sortable: false,
@@ -326,33 +226,13 @@
       }
     },
     mounted () {
+      EventBus.$on('importados', importados => {
+        this.importados = importados
+      })
+      EventBus.$on('emailsenviados', emailsenviados => {
+        this.emailsenviados = emailsenviados
+      })
       var auth = localStorage.getItem('auth')
-      axios.get('https://dropstationapi.herokuapp.com/dashboard/packages?token=' + auth)
-        .then(result => {
-          var dados = result.data
-          var max = 0
-          for (var val of dados) {
-            if (val.count > max) {
-              max = val.count
-            }
-            this.importedOrders.data.labels.push(moment(String(val.orderCreatedAt)).format('DD/MM'))
-            this.importedOrders.data.series[0].push(val.count)
-            this.importedOrders.options.high = max++
-          }
-        })
-      axios.get('https://dropstationapi.herokuapp.com/dashboard/emails?token=' + auth)
-        .then(result => {
-          var dados = result.data
-          var max = 0
-          for (var val of dados) {
-            if (val.count > max) {
-              max = val.count
-            }
-            this.emailsEnviados.data.labels.push(moment(String(val.sentat)).format('DD/MM'))
-            this.emailsEnviados.data.series[0].push(val.count)
-            this.emailsEnviados.options.high = max++
-          }
-        })
       axios.get('https://dropstationapi.herokuapp.com/dashboard/packages/bystatus?token=' + auth)
         .then(result => {
           var dados = result.data
@@ -371,7 +251,11 @@
         })
       axios.get('https://dropstationapi.herokuapp.com/dashboard/deliveryTime?token=' + auth)
         .then(result => {
-          this.media = result.data.media.toString() + ' dias'
+          if (result.data.media === 'NaN') {
+            this.media = '0'
+          } else {
+            this.media = result.data.media.toString() + ' dias'
+          }
         })
       axios.get('https://dropstationapi.herokuapp.com/dashboard/lastemails?token=' + auth)
         .then(result => {
@@ -379,6 +263,9 @@
         })
     },
     methods: {
+      importar () {
+        EventBus.$emit('importar')
+      },
       complete (index) {
         this.list[index] = !this.list[index]
       },

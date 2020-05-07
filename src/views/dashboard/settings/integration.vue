@@ -12,7 +12,7 @@
         cols="8"
         md="8"
       >
-        <base-material-card color="primary">
+        <base-material-card color="default">
           <template v-slot:heading>
             <div class="display-2 font-weight-light">
               Integrações
@@ -66,7 +66,7 @@
               >
                 <v-btn
                   v-if="integrated==false"
-                  color="success"
+                  color="secondary"
                   class="mr-0"
                   @click="getShopify(txtShop)"
                 >
@@ -74,7 +74,7 @@
                 </v-btn>
                 <v-btn
                   v-if="integrated"
-                  color="success"
+                  color="secondary"
                   class="mr-0"
                   @click="removeShopify()"
                 >

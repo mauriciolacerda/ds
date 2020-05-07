@@ -44,6 +44,8 @@
           </template>
           <template v-slot:item.name="{ item }">
             <v-chip
+              class="ma-2"
+              small
               :color="getColor(item.name)"
               dark
             >

@@ -22,7 +22,6 @@
           v-model="txtShop"
           label="seudominio.myshopify.com"
           class="purple-input"
-          :value="value"
           @input="triggerEvent"
         />
         <h5 v-if="autorizada">
@@ -36,9 +35,6 @@
   import { EventBus } from '../../../EventBus'
   export default {
     name: 'FormShopify',
-    props: {
-      value: String,
-    },
     data () {
       return {
         txtShop: '',

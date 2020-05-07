@@ -63,7 +63,7 @@
                   class="text-right"
                 >
                   <v-btn
-                    color="success"
+                    color="secondary"
                     class="mr-0"
                     @click="updateUser"
                   >

@@ -8,7 +8,7 @@
     :src="barImage"
     mobile-break-point="960"
     app
-    width="260"
+    width="200"
     v-bind="$attrs"
   >
     <template v-slot:img="props">
@@ -51,8 +51,6 @@
       expand
       nav
     >
-      <!-- Style cascading bug  -->
-      <!-- https://github.com/vuetifyjs/vuetify/pull/8574 -->
       <div />
 
       <template v-for="(item, i) in computedItems">
@@ -60,19 +58,13 @@
           v-if="item.children"
           :key="`group-${i}`"
           :item="item"
-        >
-          <!--  -->
-        </base-item-group>
-
+        />
         <base-item
           v-else
           :key="`item-${i}`"
           :item="item"
         />
       </template>
-
-      <!-- Style cascading bug  -->
-      <!-- https://github.com/vuetifyjs/vuetify/pull/8574 -->
       <div />
     </v-list>
 
