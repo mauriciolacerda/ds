@@ -160,7 +160,6 @@
       if (this.$route.query.shop && this.$route.query.hmac && this.$route.query.code && this.$route.query.state) {
         this.e1 = 2
       }
-
       EventBus.$on('inputshopify', retinput => {
         this.txtShop = retinput
       })
@@ -211,8 +210,14 @@
         localStorage.setItem('shop', shop)
         axios.get('https://dropstationapi.herokuapp.com/shopify/callback?shop=' + shop + '&hmac=' + hmac + '&code=' + code + '&state=' + state + '&idplans=' + localStorage.getItem('installPlan')).then(response => {
           localStorage.setItem('tokenShopify', response.data.tokenShopify)
-          localStorage.setItem('urlinstall', response.data.url)
-          window.location.href = response.data.url
+          if (response.data.url === null) {
+            this.e1 = 4
+            this.importCustomer()
+            this.overlay = false
+          } else {
+            localStorage.setItem('urlinstall', response.data.url)
+            window.location.href = response.data.url
+          }
         })
       },
       importCustomer () {
