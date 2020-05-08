@@ -157,6 +157,9 @@
         this.importCustomer()
         this.e1 = 4
       }
+      if (this.$route.query.shop && this.$route.query.hmac && this.$route.query.timestamp) {
+          this.getShopify (this.$route.query.shop)
+      }
       if (this.$route.query.shop && this.$route.query.hmac && this.$route.query.code && this.$route.query.state) {
         this.e1 = 2
       }
