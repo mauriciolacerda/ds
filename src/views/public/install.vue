@@ -153,19 +153,27 @@
       }
     },
     mounted () {
+      if (this.$route.query.shop && this.$route.query.hmac && this.$route.query.timestamp) {
+        if (this.$route.query.session) {
+          this.overlay = !this.overlay
+          this.overlaytext = 'Aguarde um instante, você esta sendo autenticado na DropStation.'
+          this.login()
+        } else if (this.$route.query.code && this.$route.query.state) {
+          this.e1 = 2
+        } else {
+          this.getShopify(this.$route.query.shop)
+        }
+      }
+      // fez o getSubscription e aprovou a cobrança
       if (this.$route.query.charge_id) {
         this.importCustomer()
         this.e1 = 4
       }
-      if (this.$route.query.shop && this.$route.query.hmac && this.$route.query.timestamp && !this.$route.query.state && !this.$route.query.code) {
-        this.getShopify(this.$route.query.shop)
-      }
-      if (this.$route.query.shop && this.$route.query.hmac && this.$route.query.code && this.$route.query.state) {
-        this.e1 = 2
-      }
+
       EventBus.$on('inputshopify', retinput => {
         this.txtShop = retinput
       })
+
       EventBus.$on('retvalidation', retvalidation => {
         if (retvalidation) {
           this.overlay = !this.overlay
@@ -195,6 +203,27 @@
     methods: {
       validateUser () {
         EventBus.$emit('validation', this.validar)
+      },
+      login: function () {
+        axios.post('https://dropstationapi.herokuapp.com/users/loginByShopify', {
+          shop: this.$route.query.shop,
+          hmac: this.$route.query.hmac,
+          timestamp: this.$route.query.timestamp,
+          session: this.$route.query.session,
+        })
+          .then(res => {
+            if (res.data.success === false) {
+              this.snackbar = true
+              this.message = res.data.message
+            } else {
+              this.snackbar = true
+              this.message = res.data.message
+              localStorage.setItem('auth', res.data.token)
+              localStorage.setItem('tokenShopify', res.data.tokenShopify)
+              localStorage.setItem('shop', res.data.shop)
+              this.$router.push('/')
+            }
+          })
       },
       getShopify (txtShop) {
         this.overlay = !this.overlay
