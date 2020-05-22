@@ -96,14 +96,6 @@
             <p class="font-weight-light grey--text">
               O custo atual do plano é  <b>USD {{ price }}</b>
             </p>
-            <v-btn
-              color="secondary"
-              rounded
-              to="/plans"
-              class="mr-0"
-            >
-              Cancelar assinatura
-            </v-btn>
             <v-snackbar
               v-model="snackbar"
             >

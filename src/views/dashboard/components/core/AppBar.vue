@@ -136,7 +136,6 @@
           class="ml-2"
           min-width="0"
           text
-          v-bind="attrs"
           v-on="on"
         >
           <v-icon>mdi-account</v-icon>

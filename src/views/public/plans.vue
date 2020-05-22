@@ -37,9 +37,6 @@
                   <th class="subheading font-weight-light text-center">
                     Dropstation 1000
                   </th>
-                  <th class="subheading font-weight-light text-center">
-                    Dropstation 2000
-                  </th>
                 </tr>
               </thead>
               <tbody class="text-center">
@@ -51,17 +48,11 @@
                   <td>100</td>
                   <td>500</td>
                   <td>1000</td>
-                  <td>2000+</td>
                 </tr>
                 <tr>
                   <th class="text-left font-weight-light subtitle-1">
                     Integração com Shopify
                   </th>
-                  <td>
-                    <v-icon color="success">
-                      mdi-check
-                    </v-icon>
-                  </td>
                   <td>
                     <v-icon color="success">
                       mdi-check
@@ -107,11 +98,6 @@
                       mdi-check
                     </v-icon>
                   </td>
-                  <td>
-                    <v-icon color="success">
-                      mdi-check
-                    </v-icon>
-                  </td>
                 </tr>
                 <tr>
                   <th />
@@ -119,7 +105,6 @@
                   <td><b class="subheading">$5 </b> USD/mês</td>
                   <td><b class="subheading">$19</b> USD/mês</td>
                   <td><b class="subheading">$89</b> USD/mês</td>
-                  <td><b class="subheading">$149</b> USD/mês</td>
                 </tr>
                 <tr>
                   <th />
@@ -151,14 +136,6 @@
                     <v-btn
                       color="success"
                       to="register/4"
-                    >
-                      Assine agora
-                    </v-btn>
-                  </td>
-                  <td>
-                    <v-btn
-                      color="success"
-                      to="register/5"
                     >
                       Assine agora
                     </v-btn>

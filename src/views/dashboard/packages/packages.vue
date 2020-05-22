@@ -16,8 +16,6 @@
             v-model="search"
             append-icon="mdi-magnify"
             label="Pesquisar"
-            single-line
-            hide-details
           />
         </v-card-title>
         <v-data-table
@@ -25,7 +23,9 @@
           :items="tblPackages"
           :search="search"
         >
-          <template v-slot:item.orderCreatedAt="{ item }">
+          <template
+            v-slot:item.orderCreatedAt="{ item }"
+          >
             {{ format_date(item.orderCreatedAt) }}
           </template>
           <template v-slot:item.inTransitAt="{ item }">

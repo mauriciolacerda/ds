@@ -113,11 +113,11 @@
           title: 'settings',
           to: 'settings',
         },
-        {
-          icon: 'mdi-autorenew',
-          title: 'integration',
-          to: 'integration',
-        },
+        // {
+        //   icon: 'mdi-autorenew',
+        //   title: 'integration',
+        //   to: 'integration',
+        // },
       ],
     }),
 

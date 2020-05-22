@@ -88,96 +88,115 @@
         <th />
         <td>
           <v-btn
-            id="idbtn1"
             :disabled="btn1"
-            @click="select(1)"
+            color="success"
+            @click="changePlan(1)"
           >
-            Selecione
+            {{ txt1 }}
           </v-btn>
         </td>
         <td>
           <v-btn
-            id="idbtn2"
             :disabled="btn2"
-            @click="select(2)"
+            color="success"
+            @click="changePlan(2)"
           >
-            Selecione
+            {{ txt2 }}
           </v-btn>
         </td>
         <td>
           <v-btn
-            id="idbtn3"
             :disabled="btn3"
-            @click="select(3)"
+            color="success"
+            @click="changePlan(3)"
           >
-            Selecione
+            {{ txt3 }}
           </v-btn>
         </td>
         <td>
           <v-btn
-            id="idbtn4"
             :disabled="btn4"
-            @click="select(4)"
+            color="success"
+            @click="changePlan(4)"
           >
-            Selecione
+            {{ txt4 }}
           </v-btn>
         </td>
       </tr>
     </tbody>
   </v-simple-table>
 </template>
-
 <script>
+  import decode from 'jwt-decode'
+  import axios from 'axios'
   export default {
-    name: 'TablePlans',
     data: () => ({
+      name: 'TableUpgrade',
       btn1: false,
       btn2: false,
       btn3: false,
       btn4: false,
       btn5: false,
+      txt1: 'Alterar plano',
+      txt2: 'Alterar plano',
+      txt3: 'Alterar plano',
+      txt4: 'Alterar plano',
+      txt5: 'Alterar plano',
     }),
+    mounted () {
+      var token = localStorage.getItem('auth')
+      const { idplans: idPlan } = decode(token)
+      if (idPlan === 1) {
+        this.btn1 = true
+        this.txt1 = 'Plano Contratado'
+      }
+      if (idPlan === 2) {
+        this.btn2 = true
+        this.txt2 = 'Plano Contratado'
+      }
+      if (idPlan === 3) {
+        this.btn3 = true
+        this.txt3 = 'Plano Contratado'
+      }
+      if (idPlan === 4) {
+        this.btn4 = true
+        this.txt4 = 'Plano Contratado'
+      }
+      if (idPlan === 5) {
+        this.btn5 = true
+        this.txt5 = 'Plano Contratado'
+      }
+    },
     methods: {
-      select: function (plan) {
-        const item = document.getElementById('idbtn' + plan)
-        item.children[0].firstChild.data = 'SELECIONADO'
-        localStorage.setItem('installPlan', plan)
-        if (plan === 1) {
-          this.btn1 = true
-          this.btn2 = false
-          this.btn3 = false
-          this.btn4 = false
-          this.btn5 = false
-        }
-        if (plan === 2) {
-          this.btn1 = false
-          this.btn2 = true
-          this.btn3 = false
-          this.btn4 = false
-          this.btn5 = false
-        }
-        if (plan === 3) {
-          this.btn1 = false
-          this.btn2 = false
-          this.btn3 = true
-          this.btn4 = false
-          this.btn5 = false
-        }
-        if (plan === 4) {
-          this.btn1 = false
-          this.btn2 = false
-          this.btn3 = false
-          this.btn4 = true
-          this.btn5 = false
-        }
-        if (plan === 5) {
-          this.btn1 = false
-          this.btn2 = false
-          this.btn3 = false
-          this.btn4 = false
-          this.btn5 = true
+      changePlan (id) {
+        if (this.idPlan !== id) {
+          const tokenShopify = localStorage.getItem('tokenShopify')
+          const shop = localStorage.getItem('shop')
+          localStorage.setItem('newPlan', id)
+          axios.post('https://dropstationapi.herokuapp.com/shopify/changePlan', {
+            tokenShopify: tokenShopify,
+            shop: shop,
+            idplans: id,
+          })
+            .then(res => {
+              if (res.data.success === false) {
+                this.snackbar = true
+                this.message = res.data.message
+              } else {
+                this.snackbar = true
+                this.message = res.data.message
+                window.location.href = res.data.url
+              }
+            })
         }
       },
     },
   }
 </script>
+
+<style lang="sass">
+  #upgrade
+    .v-data-table
+      th, td
+        border: none !important
+</style>
