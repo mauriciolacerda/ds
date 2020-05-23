@@ -173,7 +173,7 @@
           this.overlaytext = 'Você precisará logar novamente para confirmar a mudança de plano.'
           localStorage.removeItem('auth')
           this.$router.push('/')
-        }  else {
+        } else {
           this.importCustomer()
           this.e1 = 4
         }
@@ -268,8 +268,8 @@
         const shop = localStorage.getItem('shop')
         axios.get('https://dropstationapi.herokuapp.com/shopify/importCustomer?shop=' + shop + '&tokenShopify=' + tokenShopify + '&idplans=' + localStorage.getItem('installPlan') + '&idcustomer=' + localStorage.getItem('iduser') + '&charge_id=' + this.$route.query.charge_id)
       },
-      updatePlan (charge_id, newPlan) {
-        axios.get('https://dropstationapi.herokuapp.com/shopify/updatePlan?charge_id=' + charge_id + '&newPlan=' + newPlan + '&token=' + localStorage.getItem('auth'))
+      updatePlan (chargeId, newPlan) {
+        axios.get('https://dropstationapi.herokuapp.com/shopify/updatePlan?charge_id=' + chargeId + '&newPlan=' + newPlan + '&token=' + localStorage.getItem('auth'))
       },
     },
   }
