@@ -233,7 +233,7 @@
         this.emailsenviados = emailsenviados
       })
       var auth = localStorage.getItem('auth')
-      axios.get('https://dropstationapi.herokuapp.com/dashboard/packages/bystatus?token=' + auth)
+      axios.get(process.env.VUE_APP_HOST_API + '/dashboard/packages/bystatus?token=' + auth)
         .then(result => {
           var dados = result.data
           for (var val of dados) {
@@ -245,11 +245,11 @@
             }
           }
         })
-      axios.get('https://dropstationapi.herokuapp.com/dashboard/delayedpackages?token=' + auth)
+      axios.get(process.env.VUE_APP_HOST_API + '/dashboard/delayedpackages?token=' + auth)
         .then(result => {
           this.atrasados = result.data.contador.toString()
         })
-      axios.get('https://dropstationapi.herokuapp.com/dashboard/deliveryTime?token=' + auth)
+      axios.get(process.env.VUE_APP_HOST_API + '/dashboard/deliveryTime?token=' + auth)
         .then(result => {
           if (result.data.media === 'NaN') {
             this.media = '0'
@@ -257,7 +257,7 @@
             this.media = result.data.media.toString() + ' dias'
           }
         })
-      axios.get('https://dropstationapi.herokuapp.com/dashboard/lastemails?token=' + auth)
+      axios.get(process.env.VUE_APP_HOST_API + '/dashboard/lastemails?token=' + auth)
         .then(result => {
           this.items = result.data
         })

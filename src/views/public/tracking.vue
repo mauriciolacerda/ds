@@ -88,7 +88,7 @@
       }
     },
     mounted () {
-      axios.get('https://dropstationapi.herokuapp.com/packages/tracking?tracknumber=' + this.$route.query.tracknumber).then(response => {
+      axios.get(process.env.VUE_APP_HOST_API + '/packages/tracking?tracknumber=' + this.$route.query.tracknumber).then(response => {
         this.eventos = response
       })
     },

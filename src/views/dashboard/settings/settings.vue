@@ -119,7 +119,7 @@
     },
     mounted () {
       // recupera as configurações salvas
-      axios.get('https://dropstationapi.herokuapp.com/settings?token=' + token).then(response => {
+      axios.get(process.env.VUE_APP_HOST_API + '/settings?token=' + token).then(response => {
         this.delay_in_days = response.data.delay_in_days
         this.sendermail = response.data.sendermail
         this.subjectmail = response.data.subjectmail
@@ -130,7 +130,7 @@
     methods: {
       updatesettings: function () {
         if (this.$refs.form.validate()) {
-          axios.post('https://dropstationapi.herokuapp.com/settings', {
+          axios.post(process.env.VUE_APP_HOST_API + '/settings', {
             token: token,
             delay_in_days: this.delay_in_days,
             sendermail: this.sendermail,
@@ -140,6 +140,9 @@
           })
             .then(res => {
               if (res.data.success === false) {
+                this.snackbar = true
+                this.message = 'Ocorreu um erro na atualização dos dados'
+                this.$router.push('/settings/')
               } else {
                 this.snackbar = true
                 this.message = 'Dados atualizados com sucesso'

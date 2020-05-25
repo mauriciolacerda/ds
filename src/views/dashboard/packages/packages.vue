@@ -83,7 +83,7 @@
       }
     },
     mounted () {
-      axios.get('https://dropstationapi.herokuapp.com/packages?token=' + localStorage.getItem('auth')).then(response => {
+      axios.get(process.env.VUE_APP_HOST_API + '/packages?token=' + localStorage.getItem('auth')).then(response => {
         this.tblPackages = response.data
       })
     },

@@ -9,6 +9,20 @@
         justify="center"
       >
         <v-col
+          v-if="changeplan"
+          cols="4"
+          md="9"
+        >
+          <v-alert
+            border="top"
+            colored-border
+            type="info"
+            elevation="2"
+          >
+            Você realizou a <b>alteração do seu plano</b> na Plataforma Dropstation com sucesso! Para poder usufruir do seu novo plano, <b>realize o login novamente!</b>
+          </v-alert>
+        </v-col>
+        <v-col
           cols="12"
           md="4"
         >
@@ -116,6 +130,7 @@
     },
     data: () => ({
       snackbar: false,
+      changeplan: false,
       message: '',
       email: '',
       password: '',
@@ -134,10 +149,15 @@
         this.loader = null
       },
     },
+    mounted () {
+      if (localStorage.getItem('changeplan')) {
+        this.changeplan = true
+      }
+    },
     methods: {
       login: function () {
         if (this.$refs.form.validate()) {
-          axios.post('https://dropstationapi.herokuapp.com/users/login', {
+          axios.post(process.env.VUE_APP_HOST_API + '/users/login', {
             email: this.email,
             password: this.password,
           })
@@ -148,6 +168,7 @@
               } else {
                 this.snackbar = true
                 this.message = res.data.message
+                localStorage.clear()
                 localStorage.setItem('auth', res.data.token)
                 localStorage.setItem('tokenShopify', res.data.tokenShopify)
                 localStorage.setItem('shop', res.data.shop)

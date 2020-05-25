@@ -112,7 +112,7 @@
     mounted () {
       EventBus.$on('validation', validar => {
         if (this.$refs.form.validate()) {
-          axios.get('https://dropstationapi.herokuapp.com/users/userByEmail?email=' + this.email).then(response => {
+          axios.get(process.env.VUE_APP_HOST_API + '/users/userByEmail?email=' + this.email).then(response => {
             if (!response.data) {
               const userdata = {
                 username: this.username,
