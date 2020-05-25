@@ -98,7 +98,7 @@
     },
     mounted () {
       var auth = localStorage.getItem('auth')
-      axios.get('https://dropstationapi.herokuapp.com/dashboard/emails?token=' + auth)
+      axios.get(process.env.VUE_APP_HOST_API + '/dashboard/emails?token=' + auth)
         .then(result => {
           var dados = result.data
           var max = 0

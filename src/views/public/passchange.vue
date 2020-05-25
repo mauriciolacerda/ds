@@ -117,7 +117,7 @@
     methods: {
       changepass: function () {
         if (this.$refs.form.validate()) {
-          axios.post('https://dropstationapi.herokuapp.com/users/passchange', {
+          axios.post(process.env.VUE_APP_HOST_API + '/users/passchange', {
             email: this.email,
             password: this.password,
             hash: this.hash,

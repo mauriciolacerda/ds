@@ -124,6 +124,25 @@
         </td>
       </tr>
     </tbody>
+    <v-snackbar
+      v-model="snackbar"
+    >
+      {{ message }}
+      <v-btn
+        color="green"
+        text
+        @click="snackbar = false"
+      >
+        Fechar
+      </v-btn>
+    </v-snackbar>
+    <v-overlay :value="overlay">
+      <v-progress-circular
+        indeterminate
+        size="64"
+      />
+      {{ overlaytext }}
+    </v-overlay>
   </v-simple-table>
 </template>
 <script>
@@ -132,6 +151,9 @@
   export default {
     data: () => ({
       name: 'TableUpgrade',
+      overlay: false,
+      overlaytext: '',
+      snackbar: '',
       btn1: false,
       btn2: false,
       btn3: false,
@@ -170,24 +192,46 @@
     methods: {
       changePlan (id) {
         if (this.idPlan !== id) {
-          const tokenShopify = localStorage.getItem('tokenShopify')
-          const shop = localStorage.getItem('shop')
-          localStorage.setItem('newPlan', id)
-          axios.post('https://dropstationapi.herokuapp.com/shopify/changePlan', {
-            tokenShopify: tokenShopify,
-            shop: shop,
-            idplans: id,
-          })
-            .then(res => {
-              if (res.data.success === false) {
-                this.snackbar = true
-                this.message = res.data.message
-              } else {
-                this.snackbar = true
-                this.message = res.data.message
-                window.location.href = res.data.url
-              }
+          if (id === 1) {
+            this.overlay = true
+            this.overlaytext = 'Aguarde um instante, estamos realizando o cancelamento da sua assinatura.'
+            axios.get(process.env.VUE_APP_HOST_API + '/shopify/cancelPlan?&newPlan=' + id + '&token=' + localStorage.getItem('auth'))
+              .then(res => {
+                if (res.data.success === false) {
+                  this.overlay = false
+                  this.snackbar = true
+                  this.message = res.data.message
+                } else {
+                  localStorage.clear()
+                  localStorage.setItem('changeplan', true)
+                  this.overlay = false
+                  this.snackbar = true
+                  this.message = res.data.message
+                  this.$router.push('/login')
+                }
+              })
+          } else {
+            this.overlay = true
+            this.overlaytext = 'Aguarde um instante, você precisará confirmar a mudança do plano na Shopify.'
+            const tokenShopify = localStorage.getItem('tokenShopify')
+            const shop = localStorage.getItem('shop')
+            localStorage.setItem('newPlan', id)
+            axios.post(process.env.VUE_APP_HOST_API + '/shopify/changePlan', {
+              tokenShopify: tokenShopify,
+              shop: shop,
+              idplans: id,
             })
+              .then(res => {
+                if (res.data.success === false) {
+                  this.snackbar = true
+                  this.message = res.data.message
+                } else {
+                  this.snackbar = true
+                  this.message = res.data.message
+                  window.location.href = res.data.url
+                }
+              })
+          }
         }
       },
     },

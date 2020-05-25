@@ -170,8 +170,9 @@
           // trata-se de uma alteração de plano
           this.updatePlan(this.$route.query.charge_id, localStorage.getItem('newPlan'))
           this.overlay = true
-          this.overlaytext = 'Você precisará logar novamente para confirmar a mudança de plano.'
+          this.overlaytext = 'Você precisará realizar o login novamente para confirmar a mudança de plano.'
           localStorage.removeItem('auth')
+          localStorage.setItem('changeplan', true)
           this.$router.push('/')
         } else {
           this.importCustomer()
@@ -189,7 +190,7 @@
           this.overlaytext = 'Aguarde um instante, estamos redirecionando para a Shopify para conclusão da instalação.'
           // signup
           const dadosuser = JSON.parse(localStorage.getItem('userdata'))
-          axios.post('https://dropstationapi.herokuapp.com/users/signup', {
+          axios.post(process.env.VUE_APP_HOST_API + '/users/signup', {
             username: dadosuser.username,
             email: dadosuser.email,
             password: dadosuser.password,
@@ -215,7 +216,7 @@
         EventBus.$emit('validation', this.validar)
       },
       login: function () {
-        axios.post('https://dropstationapi.herokuapp.com/users/loginByShopify', {
+        axios.post(process.env.VUE_APP_HOST_API + '/users/loginByShopify', {
           shop: this.$route.query.shop,
           hmac: this.$route.query.hmac,
           timestamp: this.$route.query.timestamp,
@@ -238,7 +239,7 @@
       getShopify (txtShop) {
         this.overlay = true
         this.overlaytext = 'Aguarde um instante, você esta sendo autenticado no Shopify.'
-        axios.get('https://dropstationapi.herokuapp.com/shopify?shop=' + txtShop).then(response => {
+        axios.get(process.env.VUE_APP_HOST_API + '/shopify?shop=' + txtShop).then(response => {
           this.$cookies.config(60 * 60 * 24 * 30, '')
           this.$cookies.set('state', response.data.state)
           window.location.href = response.data.installUrl
@@ -250,7 +251,7 @@
         const code = this.$route.query.code
         const state = this.$route.query.state
         localStorage.setItem('shop', shop)
-        axios.get('https://dropstationapi.herokuapp.com/shopify/callback?shop=' + shop + '&hmac=' + hmac + '&code=' + code + '&state=' + state + '&idplans=' + localStorage.getItem('installPlan'))
+        axios.get(process.env.VUE_APP_HOST_API + '/shopify/callback?shop=' + shop + '&hmac=' + hmac + '&code=' + code + '&state=' + state + '&idplans=' + localStorage.getItem('installPlan'))
           .then(response => {
             localStorage.setItem('tokenShopify', response.data.tokenShopify)
             if (response.data.url === null) {
@@ -266,10 +267,10 @@
       importCustomer () {
         const tokenShopify = localStorage.getItem('tokenShopify')
         const shop = localStorage.getItem('shop')
-        axios.get('https://dropstationapi.herokuapp.com/shopify/importCustomer?shop=' + shop + '&tokenShopify=' + tokenShopify + '&idplans=' + localStorage.getItem('installPlan') + '&idcustomer=' + localStorage.getItem('iduser') + '&charge_id=' + this.$route.query.charge_id)
+        axios.get(process.env.VUE_APP_HOST_API + '/shopify/importCustomer?shop=' + shop + '&tokenShopify=' + tokenShopify + '&idplans=' + localStorage.getItem('installPlan') + '&idcustomer=' + localStorage.getItem('iduser') + '&charge_id=' + this.$route.query.charge_id)
       },
       updatePlan (chargeId, newPlan) {
-        axios.get('https://dropstationapi.herokuapp.com/shopify/updatePlan?charge_id=' + chargeId + '&newPlan=' + newPlan + '&token=' + localStorage.getItem('auth'))
+        axios.get(process.env.VUE_APP_HOST_API + '/shopify/updatePlan?charge_id=' + chargeId + '&newPlan=' + newPlan + '&token=' + localStorage.getItem('auth'))
       },
     },
   }
